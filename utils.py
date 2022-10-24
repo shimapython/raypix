@@ -5,6 +5,7 @@ iround = lambda x: int(round(x))
 
 def add_turbo(plt):
 
+#  Reference:  https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html
     turbo_colormap_data = np.array(
                            [[0.18995,0.07176,0.23217],
                            [0.19483,0.08339,0.26149],

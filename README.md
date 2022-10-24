@@ -1,4 +1,6 @@
-# ray_tracing
+Python codes for ray tracing simulaitons and machine learning 
+
+Author: Shima Hajimirza
 
 
 
