@@ -117,7 +117,6 @@ def single_ray_simulate(
     power = 1
 
     if grad_field is None:
-        # grad_field = gradient_field(medium, normalize=True)
         grad_field = reliable_gradient_field(medium, smooth_sigma=1, normalize=True)
     
     path = np.zeros_like(medium)
@@ -180,11 +179,6 @@ def single_ray_simulate(
                 coord = next_coord.copy()  
                 path[iround(coord[0]), iround(coord[1])] = power
 
-                # raise ValueError()
-                    
-                # n_now = n_m if medium_now == 1 else n_v # C++ equivalent: n_now = medium_now == 1 ? n_m : n_v
-                # n_next = n_m if medium_next == 1 else n_v
-                # grad = grad_field[:, round(next_coord[0]), round(next_coord[1])]  
 
 
                 if gnorm > EPS:
@@ -219,7 +213,6 @@ def single_ray_simulate(
                             print("YAYYYYY")
                             direction = direction - 2 * (surface_normal.dot(direction)) * surface_normal  # Reflection formula
                             coord = next_coord + direction  
-                            # raise ValueError()
                             # when direction is infenitesimal, continue until the ray pops out
                             num_count = 0
                             while True:
@@ -235,8 +228,6 @@ def single_ray_simulate(
                         else:  # Refraction
                             n_direction = rotation(-surface_normal, -theta_through)
                             direction = n_direction
-                            #direction = n1 / n2 * (direction + np.cos(theta_inc) * norm) - np.sqrt(
-                            #    1 - (n1 / n2) ** 2 * (np.sin(theta_inc)) ** 2)  # Refraction function
                 else:
                     print(f"ZERO GRADIENT {coord} {next_coord}")
                     raise ValueError(f"ZERO GRADIENT {coord} {next_coord}")
@@ -370,9 +361,6 @@ def single_ray_opaque_simulate(
                 else:
                     raise ValueError(f"ZERO GRADIENT {coord} {next_coord}")
 
-        # f = lambda c: medium[iround(c[0]), iround(c[1])] == 1
-        #assert medium[iround(coord[0]), iround(coord[1])] == 0, "Ray has ended up in material, something is wrong since matterial is opaque"
-        # assert not(f(coord) and f(coord + direction)), "Ray has ended up in material, something is wrong since matterial is opaque"
 
     return path, itr, coord, direction, strike_points, power
 

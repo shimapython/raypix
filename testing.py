@@ -52,7 +52,6 @@ def plot_rays_at_interface(direction, surface_normal, n1, n2, rand=None):
         print("Refraction")
         new_direction = rotation(-surface_normal, -theta_through)
    
-    #plt.annotate(f"theta_inc={theta_inc}", xy=tuple(-direction), xytext=(0, 0), arrowprops=dict(arrowstyle="<-", color="b"))
     plt.xlim(-1, 1)
     plt.ylim(-1, 1)
     plt.annotate("a", xy=(0, 0), xytext=tuple(-direction), arrowprops=dict(arrowstyle="->", color="b"))
@@ -107,7 +106,6 @@ def example_single_ray_sim():
 
 def example_single_ray_opaque_sim():
     import pylab as plt
-    #med = (plt.imread("medium.jpg")[:, :, 0] > 100).astype(float)
     med = media.square_medium(500, 20, 0.3, seed=1)
     grad_field = reliable_gradient_field(med, smooth_sigma=1, normalize=True)
     initial_direction = np.array([-0.5, 1]) 
@@ -202,7 +200,6 @@ def example_field_animation_mirror():
     direction_list = direction_list0 + direction_list1 
 
     path_list = []    
-    #initial_direction = np.array([-1, 0])
     fig = plt.figure()
     allimgs = []
     for ix, initial_direction in enumerate(direction_list):
@@ -224,9 +221,6 @@ def example_field_animation_mirror():
     anim = animation.ArtistAnimation(fig, allimgs, interval=200, blit=True, repeat_delay=0)
     anim.save("./anim.gif")
     plt.show()
-    #return allimgs
-        # plt.imsave(f"img{ix}.png", 
-    #plt.show()
 
 def example_field_animation_falling_circle():
     from matplotlib import animation
@@ -238,7 +232,6 @@ def example_field_animation_falling_circle():
     rand = np.random.RandomState(10)
 
     path_list = []    
-    #initial_direction = np.array([-1, 0])
     fig = plt.figure()
     allimgs = []
     center_row_list = np.linspace(0, 2 * num_rows / 3, 50)
@@ -266,6 +259,4 @@ def example_field_animation_falling_circle():
     
 
 if __name__ == "__main__":
-    # example_simulation()
-    # example_plot_reflection_1()
     example_single_ray_sim()
